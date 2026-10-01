@@ -165,11 +165,11 @@ Panel {
   // v2.0: пять кнопок; средние три циклируют провайдеров по тапу (DoT по умолчанию).
   // Cloudflare и Google в русской версии отсутствуют (заглушены в РФ) —
   // кольца только из рабочих: приватные, базовые, альтернаты.
-  readonly property var dnsRings: [["NextDNS", "DNS4EU"], ["OpenDNS", "AdGuard"], ["Mullvad", "CleanBrowsing"]]
+  readonly property var dnsRings: [["NextDNS", "DNS4EU"], ["OpenDNS", "AdGuard"], ["Mullvad", "ControlD"]]
   readonly property var dnsRingIps: ({
     "NextDNS": "45.90.28.0", "DNS4EU": "86.54.11.100",
     "OpenDNS": "208.67.222.222", "AdGuard": "94.140.14.14",
-    "Mullvad": "194.242.2.2", "CleanBrowsing": "185.228.168.9"
+    "Mullvad": "194.242.2.2", "ControlD": "76.76.2.11"
   })
   property int dnsRing0: 0
   property int dnsRing1: 0
@@ -1539,7 +1539,7 @@ Panel {
           width: parent.width
           spacing: Style.space(6)
 
-          readonly property int count: 3
+          readonly property int count: 2
           readonly property real cellWidth: (width - spacing * (count - 1)) / count
 
           Button {
@@ -1568,20 +1568,6 @@ Panel {
             width: dnsProtoRow.cellWidth
             tooltipText: "DNS через HTTPS (локальный прокси)"
             onClicked: root.applyDnsProtocol("DoH")
-          }
-
-          Button {
-            text: "DoQ"
-            fontSize: Style.font.bodySmall
-            foreground: root.bar.foreground
-            fontFamily: root.bar.fontFamily
-            horizontalPadding: Style.spacing.controlPaddingX
-            verticalPadding: Style.spacing.controlPaddingY + Style.space(2)
-            bordered: true
-            active: root.dnsProtocol === "DoQ"
-            width: dnsProtoRow.cellWidth
-            tooltipText: "DNS через QUIC-транспорт (DoH по HTTP/3)"
-            onClicked: root.applyDnsProtocol("DoQ")
           }
         }
 
